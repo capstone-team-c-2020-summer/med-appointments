@@ -1,0 +1,11 @@
+* About
+
+A prototype frontend example to demo existing functionality for CS
+students for managing appointment data.
+
+
+* License
+
+Copyright 2020 vaeringjar.
+
+Distributed under the AGPLv3+.
