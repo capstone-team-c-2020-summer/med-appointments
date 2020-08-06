@@ -1,32 +1,29 @@
 <template>
-  <div>
-    <p>under construction</p>
-  </div>
+<div class="alert alert-warning" role="alert">
+  <span class="glyphicon glyphicon-alert"></span>
+  Under construction!
+</div>
 </template>
 
 <script>
 export default {
-  name: 'UnderConstruction',
-  props: {
-    msg: String
-  }
+    name: 'UnderConstruction',
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+    margin: 40px 0 0;
 }
 ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+    display: inline-block;
+    margin: 0 10px;
 }
 a {
-  color: #42b983;
+    color: #42b983;
 }
 </style>

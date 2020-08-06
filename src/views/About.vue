@@ -1,9 +1,9 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <UnderConstruction/>
-    <p>Give credits about the project here.</p>
-  </div>
+<div class="about">
+  <h1>This is an about page</h1>
+  <UnderConstruction/>
+  <p>Give credits about the project here.</p>
+</div>
 </template>
 
 <script>
