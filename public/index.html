@@ -12,19 +12,20 @@
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but med-appointments doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <p><strong>Sorry but med-appointments cannot work properly without JavaScript enabled.</strong></p>
+      <p><strong>Please enable it to continue.</strong></p>
     </noscript>
     <div id="frontEndWiring" style="display: none;">
       {
       "api": {
-      "currentUser": "https://stage.crm.pdx.edu/deepspace/t1/dash/currentUser",
-      "filters": "https://stage.crm.pdx.edu/deepspace/t1/dash/filters",
-      "users": "https://stage.crm.pdx.edu/deepspace/t1/dash/users",
-      "apptUsers": "https://stage.crm.pdx.edu/deepspace/t1/dash/apptUsers",
-      "appointments": "https://stage.crm.pdx.edu/deepspace/t1/dash/appointments",
-      "reassign": "https://stage.crm.pdx.edu/deepspace/t1/dash/reassign",
-      "takebegin": "https://stage.crm.pdx.edu/deepspace/t1/dash/takeBegin",
-      "updateCondition": "https://stage.crm.pdx.edu/deepspace/t1/dash/updateCondition"
+      "currentUser": "http://localhost:6543/apps/api/test/current_user",
+      "filters": "http://localhost:6543/apps/api/test/filters",
+      "users": "http://localhost:6543/apps/api/test/users",
+      "apptUsers": "http://localhost:6543/apps/api/test/appt_users",
+      "appointments": "http://localhost:6543/apps/api/test/appointments",
+      "reassign": "http://localhost:6543/apps/api/test/reassign",
+      "takebegin": "http://localhost:6543/apps/api/test/take_begin",
+      "updateCondition": "http://localhost:6543/apps/api/test/update_condition"
       },
       "testResponse":true
       }

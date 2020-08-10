@@ -3,6 +3,8 @@
 A prototype frontend example to demo existing functionality for CS
 students for managing appointment data.
 
+Intended for use with [[https://notabug.org/vaeringjar/med-enterprise-dash][MED]].
+
 
 * License
 
