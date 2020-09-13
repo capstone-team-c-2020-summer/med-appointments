@@ -44,6 +44,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+    // base: "/apps/appointments_alternate",
     routes
 })
 

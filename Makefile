@@ -39,8 +39,9 @@ init:
 build:
 	@npm run build
 	@mkdir -p output
-	@mkdir -p output/css
-	@mkdir -p output/js
+	@rsync -va ./dist/ ./output/
+	@mkdir -p output/css || echo "pass"
+	@mkdir -p output/js || echo "pass"
 	@cp -r ./dist/css/app.*.css ./output/css/app.css
 	@cp -r ./dist/js/about.*.js ./output/js/about.js
 	@cp -r ./dist/js/about.*.js.map ./output/js/about.js.map
