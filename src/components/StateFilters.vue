@@ -169,7 +169,7 @@ export default {
         filters: function() { return this.runtimevals.filters },
         users: function() { return this.runtimevals.users },
         currentUser: function() { return this.runtimevals.currentUser },
-        stateQueryString: function() { return `/?teamId=${this.runtimevals.filters.teamId}&pickOwner=${this.runtimevals.filters.userId}&pickDay=${this.runtimevals.filters.date}` },
+        stateQueryString: function() { return `?teamId=${this.runtimevals.filters.teamId}&pickOwner=${this.runtimevals.filters.userId}&pickDay=${this.runtimevals.filters.date}` },
         teams: function() { return this.currentUser.teams },
         ...mapGetters([
             "api",
