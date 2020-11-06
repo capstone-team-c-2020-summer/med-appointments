@@ -1,7 +1,7 @@
 {
   "name": "med-appointments",
   "version": "0.1.0",
-  "private": true,
+  "license": "AGPL-3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
