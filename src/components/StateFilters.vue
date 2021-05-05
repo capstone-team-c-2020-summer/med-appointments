@@ -5,7 +5,6 @@
         class="form-inline">
     <div class="form-group">
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <!-- <span>{{filters.teamId ? filters.teamId : "No team selected."}}</span>&nbsp; -->
       <select @change="changeTeam($event)"
               class="form-control"
               v-model="filters.teamId">
@@ -21,14 +20,12 @@
          v-on:submit.prevent
          class="form-group">
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <!-- <span>{{filters.userId ? filters.userId : "All users for team."}}</span>&nbsp; -->
-      <select @change="changeUser($event)"
-              class="form-control"
-              v-model="filters.userId">
-        <option value="">Users &#40;All&#41;</option>
+      <select class="form-control"
+              v-model="filters.userId"
+              @change="changeUser($event)">
         <option v-for="current in users"
                 v-bind:key="current.id"
-                :value="current.id">
+                v-bind:value="current.id">
           {{current.name}}</option>
       </select>
     </div>
@@ -86,6 +83,7 @@
 </div>
 </template>
 
+
 <script>
 import { mapMutations, mapGetters } from "vuex"
 import DropDownWithAnchors from '@/components/DropDownWithAnchors.vue'
@@ -107,19 +105,26 @@ export default {
         changeTeam(event) {
             //location.href = `./?teamId=${event.target.value}`
             this.runtimevals.filters.teamId = event.target.value
-            this.getFilters(this.stateQueryString)
+            // TODO: STATIC-STATE. 
+            // this.getFilters(this.stateQueryString)
             this.runtimevals.users = ""
             this.getUsers()
         },
         changeUser(event) {
             //location.href = `./?userId=${event.target.value}`
             this.runtimevals.filters.userId = event.target.value
-            this.getFilters(this.stateQueryString)
+
+            // TODO: STATIC-STATE. This state won't work with the test
+            // APIs because they're static. We can turn them back on
+            // later or migrate all state to the client.
+            
+            // this.getFilters(this.stateQueryString)
         },
         changeDate(event) {
             //location.href = `./?pickDay=${event.target.value}`
             this.runtimevals.filters.date = event.target.value
-            this.getFilters(this.stateQueryString)
+            // TODO: STATIC-STATE.
+            // this.getFilters(this.stateQueryString)
         },
         getDateUsc(val) {
             //NOTE: To ensure the locale and timezone match, can
@@ -154,6 +159,11 @@ export default {
             this.getData(this.api.users, this, "runtimevals", "users", "errorPrompt")
         },
         refresh() { this.updateRefresh(new Date()) },
+        prepend(value, array) {
+            var newArray = array.slice();
+            newArray.unshift(value);
+            return newArray;
+        },
     },
     mounted() {
 
@@ -167,7 +177,11 @@ export default {
     },
     computed: {
         filters: function() { return this.runtimevals.filters },
-        users: function() { return this.runtimevals.users },
+        users: function() {
+            return (typeof this.runtimevals.users === "object")
+                ? this.prepend({id:"-1", name:"Users (All)"}, this.runtimevals.users)
+                : this.runtimevals.users
+        },
         currentUser: function() { return this.runtimevals.currentUser },
         stateQueryString: function() { return `?teamId=${this.runtimevals.filters.teamId}&pickOwner=${this.runtimevals.filters.userId}&pickDay=${this.runtimevals.filters.date}` },
         teams: function() { return this.currentUser.teams },
@@ -195,5 +209,6 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+
+<!-- <style scoped> -->
+<!-- </style> -->

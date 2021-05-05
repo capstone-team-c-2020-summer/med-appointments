@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Appointments from '../views/Appointments.vue'
 
+
 Vue.use(VueRouter)
+
 
 const routes = [
     {
@@ -24,6 +26,11 @@ const routes = [
         component: () => import('../views/Search.vue')
     },
     {
+        path: '/intake',
+        name: 'Intake',
+        component: () => import('../views/Intake.vue')
+    },
+    {
         path: '/record',
         redirect: '/search'
     },
@@ -43,9 +50,11 @@ const routes = [
     }
 ]
 
+
 const router = new VueRouter({
     // base: "/apps/appointments_alternate",
     routes
 })
+
 
 export default router

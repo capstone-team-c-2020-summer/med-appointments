@@ -1,26 +1,45 @@
 <template>
 <div class="search">
 
-  <UnderConstruction/>
-
   <div v-if="success">
     <h1>Search Results</h1>
+
+    <vue-good-table
+      :columns="columns"
+      :rows="results"
+      :pagination-options="{
+        enabled: true,
+        mode: 'records',
+        perPage: 25,
+        position: 'bottom',
+        perPageDropdown: [1, 5, 10, 25, 50],
+        dropdownAllowAll: false,
+        setCurrentPage: 1,
+        nextLabel: 'next',
+        prevLabel: 'prev',
+        rowsPerPageLabel: 'Rows per page',
+        ofLabel: 'of',
+        pageLabel: 'page',
+        allLabel: 'All',
+      }">
+      <template slot="table-row" slot-scope="props">
+        <span v-if="props.column.field == 'record' && props.row.recordId">
+          <router-link :to="{ name: 'Record', params: { id: props.row.recordId }}">{{ props.row.id }}</router-link>
+        </span>
+      </template>
+    </vue-good-table>
+
+    <br />
+    <router-link :to="{ name: 'Intake'}"
+                 class="btn btn-danger btn-block">
+      Can't find the record?
+    </router-link>
+    <br />
     <button type="button"
-            class="btn btn-primary"
+            class="btn btn-warning"
             v-on:click="searchAgain()">New Search
     </button>
-    <table aria-label="Table"
-           class="table">
-      <tr v-for="(entry, index) in results" :key="index">
-	<td v-if="entry.recordId">
-          <router-link :to="{ name: 'Record', params: { id: entry.recordId }}">{{ entry.id }}</router-link>
-        </td>
-        <td v-else>{{ entry.id }}</td>
-        <td>{{ entry.name }}</td>
-        <td>{{ entry.email }}</td>
-        <td>{{ entry.phone }}</td>
-      </tr>
-    </table>
+
   </div>
   <div v-else
        :data-lazy="success">
@@ -48,16 +67,19 @@
 </div>
 </template>
 
+
 <script>
 import { mapGetters } from "vuex"
-import UnderConstruction from '@/components/UnderConstruction.vue'
+import 'vue-good-table/dist/vue-good-table.css'
+import { VueGoodTable } from 'vue-good-table';
+
 
 export default {
     name: 'Search',
     props: [
     ],
     components: {
-        UnderConstruction
+        VueGoodTable,
     },
     computed: {
         searchRecords: function() { return this.api ? this.api.searchRecords : "" },
@@ -67,6 +89,24 @@ export default {
     },
     data() {
         return {
+            columns:[
+                {
+                    label: 'Record',
+                    field: 'record',
+                },
+                {
+                    label: 'Name',
+                    field: 'name',
+                },
+                {
+                    label: 'Email',
+                    field: 'email',
+                },
+                {
+                    label: 'Phone',
+                    field: 'phone',
+                },
+            ],
             searchInput: '',
             success: false,
             results: '',
@@ -79,6 +119,9 @@ export default {
         },
         searchForRecords() {
             const endpoint = this.searchRecords
+
+            // TODO: Move the results into the state so navigation can
+            // revisit previous results.
             if (endpoint) {
                 fetch(`${endpoint}?foo=${this.searchInput}`)
                     .then(response => response.json())
@@ -103,3 +146,8 @@ export default {
     }
 }
 </script>
+
+
+<!-- <style scoped> -->
+
+<!-- </style> -->
