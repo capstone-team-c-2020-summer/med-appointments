@@ -14,10 +14,6 @@ help:
 	@sed -n -e '/sed/! s/\.PHONY: //p' Makefile
 
 
-.PHONY: all
-all: run
-
-
 .PHONY: run
 run:
 	@npm run serve
@@ -26,13 +22,8 @@ run:
 .PHONY: upgrade
 upgrade:
 	vue upgrade
-	npm audit fix
+	npm audit fix || echo ""
 	@echo "Suggestion: sudo npm update -g @vue/cli"
-
-
-.PHONY: init
-init:
-	@npm install
 
 
 .PHONY: build
