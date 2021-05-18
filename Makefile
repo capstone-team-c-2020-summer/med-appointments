@@ -44,6 +44,11 @@ build:
 	@printf '\n\n'
 
 
+.PHONY: fixed
+fixed:
+	@npx prettier --write ./src/*/*.js ./src/*/*.vue
+
+
 .PHONY: rebuild
 rebuild: clean build
 
