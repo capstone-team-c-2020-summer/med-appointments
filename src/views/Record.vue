@@ -33,22 +33,20 @@
 
     <ul class="nav nav-tabs">
       <li id="tab_mode_record_details">
-        <a data-for-component="mode_record_details">Details</a>
+        <a @click="updateMode(modeDetails)">Details</a>
       </li>
       <li id="tab_mode_record_history">
-        <a data-for-component="mode_record_history">History</a>
+        <a @click="updateMode(modeHistory)">History</a>
       </li>
       <li id="tab_mode_record_files">
-        <a data-for-component="mode_record_files">Files</a>
+        <a @click="updateMode(modeFiles)">Files</a>
       </li>
       <li v-show="numTeams > 0" id="tab_mode_record_create_appointment">
-        <a data-for-component="mode_record_create_appointment"
-          >Create Appointment</a
-        >
+        <a @click="updateMode(modeCreateAppointment)">Create Appointment</a>
       </li>
     </ul>
 
-    <div v-if="mode === 'mode_record_details'">
+    <div v-if="mode === modeDetails">
       <p>Full Name: {{ record.contact.fullName }}</p>
       <p>First/Given: {{ record.contact.firstName }}</p>
       <p>Middle: {{ record.contact.middleName }}</p>
@@ -63,7 +61,7 @@
       <p>Gender: {{ record.contact.gender }}</p>
     </div>
 
-    <div v-else-if="mode === 'mode_record_history'">
+    <div v-else-if="mode === modeHistory">
       <vue-good-table
         :columns="columns"
         :rows="record.history"
@@ -95,11 +93,11 @@
       </vue-good-table>
     </div>
 
-    <div v-else-if="mode === 'mode_record_files'">
+    <div v-else-if="mode === modeFiles">
       {{ mode }}
     </div>
 
-    <div v-else-if="mode === 'mode_record_create_appointment'">
+    <div v-else-if="mode === modeCreateAppointment">
       {{ mode }}
     </div>
 
@@ -123,6 +121,26 @@ export default {
     ...mapGetters(["api"]),
     record: function() {
       return this.runtimevals.record;
+    },
+    modesAvailable: function() {
+      return [
+        this.modeDetails,
+        this.modeHistory,
+        this.modeFiles,
+        this.modeCreateAppointment
+      ];
+    },
+    modeDetails: function() {
+      return "mode_record_details";
+    },
+    modeHistory: function() {
+      return "mode_record_history";
+    },
+    modeFiles: function() {
+      return "mode_record_files";
+    },
+    modeCreateAppointment: function() {
+      return "mode_record_create_appointment";
     }
   },
   data() {
@@ -157,6 +175,21 @@ export default {
   },
   methods: {
     ...mapMutations(["updateErrorPrompt"]),
+    updateMode: function(mode) {
+      this.mode = mode;
+    },
+    setModeToDetails: function() {
+      console.log("hit mode button details");
+    },
+    setModeToHistory: function() {
+      console.log("hit mode button history");
+    },
+    setModeToFiles: function() {
+      console.log("hit mode button files");
+    },
+    setModeToCreateAppointment: function() {
+      console.log("hit mode button create appointment");
+    },
     getRecord: function() {
       function getData(endpoint, that, bucket, refs, errorPrompt) {
         that["loading"] = true;
@@ -191,3 +224,5 @@ export default {
   }
 };
 </script>
+
+<!-- <style></style> -->
